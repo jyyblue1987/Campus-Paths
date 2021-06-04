@@ -1,0 +1,9 @@
+# Test load graph classes correctly
+
+loaded graph classes
+
+classes contains: CSE311 CSE312 CSE331 CSE332 CSE333 CSE344 CSE351 CSE440
+the children of CSE311 in classes are: CSE312(A) CSE351(A) CSE440(A)
+the children of CSE312 in classes are: CSE311(A) CSE351(A) CSE440(A)
+the children of CSE344 in classes are:
+the children of CSE332 in classes are: CSE331(C) CSE333(C)

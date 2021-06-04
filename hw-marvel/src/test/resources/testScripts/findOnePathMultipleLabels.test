@@ -1,0 +1,17 @@
+# checks if the output is correct for paths with multiple labels
+
+CreateGraph g
+
+AddNode g n1
+AddNode g n2
+AddNode g n3
+AddNode g n4
+
+AddEdge g n1 n2 a
+AddEdge g n1 n2 b
+AddEdge g n2 n3 c
+AddEdge g n2 n3 d
+AddEdge g n3 n4 e
+AddEdge g n3 n4 f
+
+FindPath g n1 n4

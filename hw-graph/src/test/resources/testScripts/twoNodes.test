@@ -1,0 +1,13 @@
+# To test if we can add two nodes to the graph
+
+# Create a graph
+CreateGraph A
+
+# Add two nodes
+AddNode A n1
+AddNode A n2
+
+# Print out the nodes in the graph along with their outgoing edges
+ListNodes A
+ListChildren A n1
+ListChildren A n2

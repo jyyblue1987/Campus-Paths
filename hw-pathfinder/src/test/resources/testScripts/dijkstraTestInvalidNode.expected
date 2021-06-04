@@ -1,0 +1,13 @@
+# Find a path with Dijkstra's algorithm when there is an invalid node
+
+created graph graph
+
+added node A to graph
+added node B to graph
+added node C to graph
+
+added edge 1.000 from A to C in graph
+added edge 1.000 from A to D in graph
+added edge 1.000 from A to B in graph
+
+unknown: D

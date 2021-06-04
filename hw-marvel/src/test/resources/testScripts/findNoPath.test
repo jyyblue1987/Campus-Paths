@@ -1,0 +1,8 @@
+# test for empty path
+
+CreateGraph g
+
+AddNode g n1
+AddNode g n2
+
+FindPath g n1 n2

@@ -1,0 +1,16 @@
+# Find a path with Dijkstra's algorithm when there are multiple edges with the same start node, end node, and weight
+
+created graph graph
+
+added node A to graph
+added node B to graph
+
+added edge 0.500 from A to B in graph
+added edge 0.500 from A to B in graph
+added edge 0.500 from A to B in graph
+added edge 0.500 from A to B in graph
+added edge 0.500 from A to B in graph
+
+path from A to B:
+A to B with weight 0.500
+total cost: 0.500

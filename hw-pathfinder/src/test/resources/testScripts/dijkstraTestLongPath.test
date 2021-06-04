@@ -1,0 +1,22 @@
+# Find a path with Dijkstra's algorithm when the path is long
+
+CreateGraph graph
+
+AddNode graph A
+AddNode graph B
+AddNode graph C
+AddNode graph D
+AddNode graph E
+AddNode graph F
+AddNode graph G
+AddNode graph H
+
+AddEdge graph A B 1.0
+AddEdge graph B C 1.0
+AddEdge graph C D 1.0
+AddEdge graph D E 1.0
+AddEdge graph E F 1.0
+AddEdge graph F G 1.0
+AddEdge graph G H 1.0
+
+FindPath graph A H

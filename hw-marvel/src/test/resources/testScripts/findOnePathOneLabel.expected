@@ -1,0 +1,17 @@
+# checks if the output is correct for paths with single labels
+
+created graph g
+
+added node n1 to g
+added node n2 to g
+added node n3 to g
+added node n4 to g
+
+added edge e12 from n1 to n2 in g
+added edge e23 from n2 to n3 in g
+added edge e34 from n3 to n4 in g
+
+path from n1 to n4:
+n1 to n2 via e12
+n2 to n3 via e23
+n3 to n4 via e34

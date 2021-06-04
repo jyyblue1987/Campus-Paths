@@ -1,0 +1,30 @@
+## CSE 331 hw-setup Questions
+## Part 6
+
+1. Why did Fibonacci fail the testThrowsIllegalArgumentException< test? What (if anything) did
+you have to do to fix it? If you did not have to change anything to fix this issue, explain why.
+
+The Fibonacci fail the testThrowsIllegalArgumentException< test because the code takes in the
+number 0 as a negative number. I had to remove the '=' sign right after the '<' sign in order to
+correct the code so that it does not take 0 as a negative number.
+
+
+2. Why did Fibonacci fail the testBaseCase test? What (if anything) did you have to do to fix
+it? If you did not have to change anything to fix this issue, explain why.
+
+Fibonacci failed the testBaseCase test because the code assumes the number 2 (index 2) to return 1.
+Only the first two numbers of the Fibonacci sequence is 1. To fix this, I had to remove the '='
+sign right after the '<' sign in order to correct the code so that it does not include the number 2
+when 1 is returned.
+
+
+
+3.Why did Fibonacci fail the testInductiveCase test? What (if anything) did you have to do to
+fix it? If you did not have to change anything to fix this issue, explain why.
+
+It failed the testInductiveCase test because instead of adding the previous two terms, the code
+subtracts the second term from the first term. To fix it, I had to change the '-' sign to
+become the '-' sign between getFibTerm(n - 1) and getFibTerm(n - 2).
+
+
+

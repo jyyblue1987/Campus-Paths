@@ -1,0 +1,5 @@
+# Test find path on flights.csv
+
+LoadGraph flights flights.csv
+
+FindPath flights GARUDA-INDONESIA EVA-AIRWAYS

@@ -1,0 +1,14 @@
+# To test if the graph will allow for duplicate nodes (they should not)
+
+# Create a graph
+CreateGraph A
+
+# Add a node
+AddNode A n
+
+# Add a duplicate node
+AddNode A n
+
+# Print out the nodes in the graph along with their outgoing edges (if any)
+ListNodes A
+ListChildren A n

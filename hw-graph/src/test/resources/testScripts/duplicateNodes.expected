@@ -1,0 +1,14 @@
+# To test if the graph will allow for duplicate nodes (they should not)
+
+# Create a graph
+created graph A
+
+# Add a node
+added node n to A
+
+# Add a duplicate node
+added node n to A
+
+# Print out the nodes in the graph along with their outgoing edges (if any)
+A contains: n
+the children of n in A are:

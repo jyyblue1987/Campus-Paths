@@ -1,0 +1,13 @@
+# To test if the graph will output the two nodes we add in alphabetical order
+
+# Create a graph
+CreateGraph A
+
+# Add two nodes
+AddNode A z
+AddNode A x
+
+# Print out the nodes in the graph along with their outgoing edges
+ListNodes A
+ListChildren A x
+ListChildren A z

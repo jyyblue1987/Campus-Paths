@@ -1,0 +1,63 @@
+## CSE 331 hw-graph Part 2 Questions
+
+NOTE: This file is used as part of hw-graph-part2, and is not due as part of the hw-graph-part1
+submission. You may leave it blank for hw-graph-part1.
+
+## Section 1
+###########################################################################
+
+A few examples of possible Graph representations:
+
+    A: A collection of edges.
+    B: An adjacency list, in which each node is associated with a list of its outgoing edges.
+    C: An adjacency matrix, which explicitly represents, for every pair ⟨A,B⟩ of edges, whether there is a link from A to B, and how many.
+
+1. In two or three sentences, explain an advantage and a disadvantage of each of the
+representations listed above (for example, in terms of runtime complexity, space
+complexity, or ease of implementation).
+
+An advantage of using a collection of edges is that it also makes use of one data structure and so it reduces the runtime complexity and
+also space complexity. However, the disadvantage is that it might be hard for us to extract the outgoing edges of each node.
+
+An advantage of using an adjacency list is that it is extremely convenient to get the list of the outgoing edges, unlike if we are using a
+collection of edges. However, the disadvantage is that the space complexity might not be good.
+
+An advantage of using an adjacency matrix is that it is extremely fast and easy to remove or add an edge, and so it has a good time
+complexity. However, the disadvantage is that it might be extremely hard to maintain.
+
+
+2. In two to three sentences, describe the representation you chose and explain why you
+chose it. If you chose to use a different representation than one of the three we described
+above, be sure to list its advantages and disadvantages, too.
+
+The representation that I chose to use is by storing the nodes in a HashMap and then have each node be mapped to a HashSet that contains
+all the outgoing edges of the node.
+
+The advantage of this representation is that it has a good time complexity when it comes to basic operations such as adding a node and edge.
+However, the disadvantage is that it might get complicated if items have a bad hashing algorithm.
+
+
+## Section 4
+###########################################################################
+
+    (Please keep your answers brief and to-the-point.)
+
+1. Describe any new tests you added and why you added them, or why you feel that your original
+tests alone are sufficient.
+
+The only test that I added was a test to check whether or not my getStart() method from my Edge
+class properly executes. This is because I added an additional field in my Edge class and also
+an additional getStart() method to take into account the starting node of an edge. I think the
+rest of the tests are already sufficient as I try to cover as much as possible already and I
+cannot think of any additional tests that will be useful.
+
+
+2. Did you make any changes to your specifications as you were implementing your Graph? (yes/no)
+If yes, describe your changes and why you made them.
+
+Yes, I added the start node as a field in my Edge class. This is to prevent problems such as
+having to list all the edges in the graph. Without including the start node, we cannot differentiate
+between edges that have the same end nodes and label but different start nodes.
+
+
+

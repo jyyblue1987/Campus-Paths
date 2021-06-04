@@ -1,0 +1,5 @@
+# Test find a path on an unknown node
+
+LoadGraph name nameYear.csv
+
+FindPath name GISELLE-VANESSA TOM-CRUISE

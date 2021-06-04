@@ -1,0 +1,193 @@
+## CSE 331 hw-poly Questions
+## Part 0
+###########################################################################
+
+1. Multiplication Pseudocode
+r = p * q:
+    set r = 0
+    {inv: r = (p_0)*(q_0 + q_1 + ... + q_i-1) + (p_1)*(q_0 + q_1 + ... + q_i-1) + ...
+    + (p_i-1)*(q_0 + q_1 + ... + q_i-1), where p_j is the jth term in p and q_j
+    is the jth term in q}
+    foreach term, t_p, in p:
+        foreach term, t_q, in q:
+            set t_pq be a term to the multiplication of t_p and t_q
+            using the polynomial addition method, r = r + t_pq
+
+
+2. Division Pseudocode
+r = p / q:
+    set r = 0
+    {inv: p = r * q + temp}
+    while the max degree in p, d_p is greater than or equal to the max degree in q, d_q:
+        set temp = d_p/d_q
+        insert temp to r
+        set k = 0
+        foreach term, t_q, in q:
+            set t_qa = temp * t_q
+            using the polynomial addition method, k = k + t_qa
+        foreach term, t_k, in k:
+            using the polynomial addition method, p = p - t_k
+
+
+3. Division Example: (x3+x-1) / (x+1) = x2-x+2
+p = x^3 + x - 1
+q = x + 1
+r = x^2 - x + 2
+r = 0
+Iteration 1: d_p = x^3, d_q = x
+    [while the max degree in p, d_p is greater than or equal to the max degree in q, d_q] YES
+        [set temp = d_p/d_q] temp = x^2
+        [insert temp to r] r = x^2
+        [set k = 0] k = 0
+        foreach term, t_q, in q:
+            Iteration 1a1: t_q = x
+                [set t_qa = temp * t_q] t_qa = x^3
+                [using the polynomial addition method, k = k + t_qa] k = x^3
+            Iteration 1a2: t_q = 1
+                [set t_qa = temp * t_q] t_qa = x^2
+                [using the polynomial addition method, k = k + t_qa] k = x^3 + x^2
+        foreach term, t_k, in k:
+            Iteration 1b1: t_k = x^3
+                [using the polynomial addition method, p = p - t_k] p = x - 1
+            Iteration 1b2: t_k = x^2
+                [using the polynomial addition method, p = p - t_k] p = x - 1 - x^2
+Iteration 2: d_p = -x^2, d_q = x
+    [while the max degree in p, d_p is greater than or equal to the max degree in q, d_q] YES
+        [set temp = d_p/d_q] temp = -x
+        [insert temp to r] r = x^2 - x
+        [set k = 0] k = 0
+        foreach term, t_q, in q:
+            Iteration 2a1: t_q = x
+                [set t_qa = temp * t_q] t_qa = -x^2
+                [using the polynomial addition method, k = k + t_qa] k = -x^2
+            Iteration 2a2: t_q = 1
+                [set t_qa = temp * t_q] t_qa = -x
+                [using the polynomial addition method, k = k + t_qa] k = -x^2 - x
+        foreach term, t_k, in k:
+            Iteration 2b1: t_k = -x^2
+                [using the polynomial addition method, p = p - t_k] p = x - 1
+            Iteration 2b2: t_k = -x
+                [using the polynomial addition method, p = p - t_k] p = 2x - 1
+Iteration 3: d_p = 2x, d_q = x
+    [while the max degree in p, d_p is greater than or equal to the max degree in q, d_q] YES
+        [set temp = d_p/d_q] temp = 2
+        [insert temp to r] r = x^2 - x + 2
+        [set k = 0] k = 0
+        foreach term, t_q, in q:
+            Iteration 3a1: t_q = x
+                [set t_qa = temp * t_q] t_qa = 2x
+                [using the polynomial addition method, k = k + t_qa] k = 2x
+            Iteration 3a2: t_q = 1
+                [set t_qa = temp * t_q] t_qa = 2
+                [using the polynomial addition method, k = k + t_qa] k = 2x + 2
+        foreach term, t_k, in k:
+            Iteration 3b1: t_k = 2x
+                [using the polynomial addition method, p = p - t_k] p = 2x - 1 - (2x) = -1
+            Iteration 3b2: t_k = 2
+                [using the polynomial addition method, p = p - t_k] p = -1 - 2 = -3
+Iteration 4: d_p = -3, d_q = x
+    [while the max degree in p, d_p is greater than or equal to the max degree in q, d_q] NO
+We are done! r = x^2 - x + 2
+
+
+## Part 1
+###########################################################################
+
+1. Weakened Rep Invariant
+- The constructor RatNum with 2 parameter (RatNum(int n, int d)) needs to change. It no longer
+has to include the dividing by their GCD step because the new rep invariant does not require it
+to be in reduced form.
+- checkRep() should also no longer include assertion to check if the rational number
+is at its reduced form.
+- hashCode() should be changed so that it can output the same integer for rational numbers that
+are the same (reduced form = unreduced form). We can do this by using the GCD method before
+returning.
+- The equals method also needs to be changed. It has to make sure that a rational number that is
+in its unreduced form is equal to its reduced form. We can do this by using the GCD method.
+- toString() method also needs to be changed to include the GCD method in order to satisfy the
+specification that it needs to be outputted in its reduced form.
+
+I think overall these changes will actually reduce efficiency because more methods are now required
+to include the GCD method (equals, toString, hashCode). The GCD method includes a while loop in it
+which may take some time to run. However, the new constructor with 2 parameters and the checkRep()
+method becomes much more simplified.
+
+
+2. Alternate add, sub, mul, div
+From the specification, we know that RatNum represents an immutable rational function and so we can
+see that there is no @modifies clause. However, if we would change the implementation
+of the add, sub, mul, and div methods to have the last statement be the one written in the question,
+we would have to assign new values to the this.numer and this.denom, therefore modifying the
+parameters and violating the specification.
+
+
+3. Constructor checkReps
+Since the fields are all private, none of the methods will modify the value stored in these fields (RatNum).
+Instead, the methods will only return new objects. Therefore, it is sufficient to call checkRep only at the
+end of the constructors.
+
+
+## Part 2
+###########################################################################
+
+1. Calls to checkRep in RatTerm
+I only added one call to checkRep, which is at the end of the constructor.
+This is because the fields of these classes are private and the spec also
+states that RatTerm is an immutable representation of a term, and so none
+of the defined methods will be able to change the initial object, but
+instead only return a new object.
+
+
+2. Weakened Rep Invariant
+- We can eliminate the check in the constructor that checks if the coefficient
+is zero. I think an advantage of this is that it makes the code look cleaner
+and much easier to read.
+- We also need to modify the toString() method so that it can check if the
+coefficient is zero and then return 0. I think this change would be a
+disadvantage here as it would make it more complex.
+- We also need to modify the equals method to make sure that if both objects
+have a coefficient of zero, then they are equal and the method should return
+true. This change also adds complexity to the code.
+- checkRep() method also needs to be modified to exclude the check for expt is
+0 if the coefficient is 0. Since there are less checks, it makes it less complex.
+
+
+3. Alternate Rep Invariant
+- The constructor needs to be modified to include the case if the coefficient
+is equal to NaN, so that we can set the expt to be zero. I think this would result
+in an increase of complexity, does not benefiting the program.
+- We need to modify the equal method so that we don't have to check if both the
+coefficients are NaN. This will help reduce complexity.
+- We also need to modify the checkRep() method so that it checks for when the
+coefficient is NaN. In this case, the expt must be equal to zero. Since we are
+adding more checks, I think this would increase complexity.
+
+
+4. Preferred Invariants
+I prefer both to be included because by doing so, the rep invariant will
+not allow for the coefficient to be zero or NaN. This way, we do not have to take
+into account coefficients of NaN or zero in the rest of the methods.
+
+
+## Part 3
+###########################################################################
+
+1. Calls to checkRep in RatPoly
+I only included calls to checkRep at the end of the constructors. This is
+because the spec mentioned that RatPoly represents an immutable single-variate
+polynomial expression. Since it is immutable, none of the defined methods will
+be able to change the initial object, but instead only return a new object that
+has already fulfill the rep invariant.
+
+
+2. Alternate Representation
+The advantage of representing a RatPoly like this is that the code will look a
+lot less complex compared to if we use a list of RatTerms. However, the
+disadvantage is that it would be really hard to use in the different methods
+we will implement. For example, if we want to add or remove a term, we will have
+to deal with two different lists instead of just one. I think the original
+representation, using a list of RatTerms, is better because overall, it will
+make the code less complex and more efficient as we do not have to deal with
+more lists.
+
+

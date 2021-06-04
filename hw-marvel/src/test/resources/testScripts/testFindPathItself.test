@@ -1,0 +1,5 @@
+# Test if the output is correct for finding a path to itself
+
+LoadGraph superhero staffSuperheroes.csv
+
+FindPath superhero Ernst-the-Bicycling-Wizard Ernst-the-Bicycling-Wizard

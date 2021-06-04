@@ -1,0 +1,8 @@
+# Test find path on flights.csv
+
+loaded graph flights
+
+path from GARUDA-INDONESIA to EVA-AIRWAYS:
+GARUDA-INDONESIA to JAPAN-AIRLINES via 54
+JAPAN-AIRLINES to QATAR-AIRWAYS via 10
+QATAR-AIRWAYS to EVA-AIRWAYS via 8

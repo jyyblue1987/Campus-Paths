@@ -1,0 +1,14 @@
+# Find a path with Dijkstra's algorithm when there are multiple edges with the same start node, end node, and weight
+
+CreateGraph graph
+
+AddNode graph A
+AddNode graph B
+
+AddEdge graph A B 0.5
+AddEdge graph A B 0.5
+AddEdge graph A B 0.5
+AddEdge graph A B 0.5
+AddEdge graph A B 0.5
+
+FindPath graph A B

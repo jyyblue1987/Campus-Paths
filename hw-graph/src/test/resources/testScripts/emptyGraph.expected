@@ -1,0 +1,7 @@
+# To test if we can create a graph
+
+# Create a graph
+created graph A
+
+# Print out the nodes in the graph
+A contains:

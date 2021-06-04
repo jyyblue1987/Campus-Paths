@@ -1,0 +1,5 @@
+# Test load a graph with no nodes
+
+LoadGraph empty emptyFile.csv
+
+FindPath empty n1 n2

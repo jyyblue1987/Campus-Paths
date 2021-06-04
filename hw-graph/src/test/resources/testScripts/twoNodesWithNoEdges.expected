@@ -1,0 +1,15 @@
+# To test if we can have a graph with 2 nodes and no edges
+
+# Create a graph
+created graph A
+
+# Add two nodes
+added node n1 to A
+added node n2 to A
+
+# Add 0 edges
+
+# Print out the nodes in the graph along with their outgoing edges (if any)
+A contains: n1 n2
+the children of n1 in A are:
+the children of n2 in A are:

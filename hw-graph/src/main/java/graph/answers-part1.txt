@@ -1,0 +1,110 @@
+## CSE 331 hw-graph Part 1 Questions
+
+## Section 1
+###########################################################################
+
+1. Write an AF and RI for IntQueue1 and IntQueue2.
+
+    ### IntQueue1
+
+    Abstraction Function:
+    entries = [] if there are no elements in entries
+    entries = [n1, n2, ..., n_k], where n1 is the first item in the queue
+    and is the next item to be removed. n_k is the last item added and will
+    be the last of the current elements to be removed. k = entries.size().
+
+    Representation Invariant:
+    entries != null && entries.get(i) != null
+
+
+    ### IntQueue2
+
+    Abstraction Function:
+    for entries = [n1, n2, ..., n_k] and front = i, size = n,
+        entries = [] if size = 0
+        entries = [n_(i+1), n_(i+2), ..., n_(i+n)] if front + size <= entries.length
+        entries = [n_(i+1), n_(i+2), ..., n_k, n1, n2, ..., n_(k-i)] if front + size > entries.length
+    where entries[front] represents the first item in the queue and is the next item to be removed,
+    entries[(front+size-1)%entries.length] represents the last item added and will be the last item
+    to be removed.
+
+    Representation Invariant:
+    entries != null && front >= 0 && front < entries.length && size >= 0 && size <= entries.length
+
+
+2. Group the snapshots of IntQueue2's internal state into groups that have the same abstract state.
+a = d = g,
+b = h,
+c = f
+
+
+3. For each signature below, state and justify in 1-2 sentences (per part) whether the method or constructor
+could possibly expose the representation, given the information available. Explain any assumptions you made.
+
+    a. `public int solveEquations(int x, int y, int z)`
+    This method will not expose the representation because it only returns a primitive data type that is
+    immutable.
+
+    b. `public String[] decode(boolean slowly)`
+    This method could possibly expose the representation because String[] is mutable.
+
+    c. `private Date myBirthday()`
+    This method could possibly expose the representation if the Date is mutable and the returned date is not
+    a copy of the original date.
+
+    d. `public String toString()`
+    Since String is immutable, this method will not expose the representation.
+
+    e. `public Iterator<Integer> elements()`
+    This method could possibly expose the representation because it may reference to mutable collections such
+    as the remove method.
+
+    f. `public Deck(List<Card> cards)`
+    This method could possibly expose the representation if the Deck is mutable and the returned Deck is not a
+    copy of the original data.
+
+
+## Section 2
+###########################################################################
+
+Briefly explain why you included the operations you did and why you feel they are a sufficient
+interface to a graph. If your design includes multiple classes or interfaces, explain why you
+included each one; if not, explain whether you considered additional classes and why you decided
+not to include them.
+
+I decided to create two classes; DirectedLabeledGraph and Edges. The DirectedLabeledGraph would represent a
+mutable directed labeled graph, while the Edges represents an immutable edge with a label and the child node
+its pointing to.
+
+Under DirectedLabeledGraph, I included the addNode and addEdges operations so that we can add a new node and
+a new edge if they are not already present in the graph. Then I also included the containsNode and containsEdge
+operations to check if the specified node and edge is on the graph. To remove nodes and edges, I have included
+the removeNode and removeEdges operations. There is also a isEmpty and size operation so that we can check the
+state and size of the graph. Lastly, I also added getAllNodes, getEdges, and getChildrenNodes operations so that
+we can get the list of all existing nodes and also the edges and the children nodes of the specified node. With
+these operations, we can also make sure that the graph does not contain any duplicate node or edge.
+
+Under Edges, I included the getLabel and getEnd operation so that we can get the label and end of the specified
+edge.
+
+These are sufficient interface to a graph because it allows the users to build the graph with the correct rules
+and also get some information on it.
+
+
+## Section 3
+###########################################################################
+
+What was your testing strategy for this assignment? How do your script tests and JUnit tests
+differ from each other (if they do), and why?
+The testing strategy I used is based on what's introduced in the "Designing Tests" section of the specs of our
+homework, the "0, 1, 2" case analysis. Using this strategy, I have test cases that reflect graphs with zero,
+one, and two nodes mixing it with different numbers of edges as well (no edges, 1 edge, 2 edge, etc). These
+graphs are then used to test the different methods I have listed on the DirectedLabeledGraph class
+and also to make sure that the program/code does not violate any rule. With different numbers of nodes and edges,
+I also varied the types of graphs. For example, I tested graphs with multiple edges between the same nodes,
+reflexive graphs, adding duplicate nodes and edges, and also if it outputs in the right order.
+
+I think my script tests and JUnit tests differ from each other because there are a lot of things that we cannot
+test in the script tests. For example, we cannot necessarily test all our methods in the script test. Therefore,
+for everything else that I cannot test in the script test, I added it in the JUnit test.
+

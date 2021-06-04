@@ -1,0 +1,19 @@
+# To test if we can have a complete graph by adding two nodes and 4 edges
+
+# Create a graph
+CreateGraph A
+
+# Add two nodes
+AddNode A n1
+AddNode A n2
+
+# Add four edges
+AddEdge A n1 n1 e11
+AddEdge A n1 n2 e12
+AddEdge A n2 n2 e22
+AddEdge A n2 n1 e21
+
+# Print out the nodes in the graph along with their outgoing edges
+ListNodes A
+ListChildren A n1
+ListChildren A n2

@@ -1,0 +1,30 @@
+# Find a path with Dijkstra's algorithm when the path is long
+
+created graph graph
+
+added node A to graph
+added node B to graph
+added node C to graph
+added node D to graph
+added node E to graph
+added node F to graph
+added node G to graph
+added node H to graph
+
+added edge 1.000 from A to B in graph
+added edge 1.000 from B to C in graph
+added edge 1.000 from C to D in graph
+added edge 1.000 from D to E in graph
+added edge 1.000 from E to F in graph
+added edge 1.000 from F to G in graph
+added edge 1.000 from G to H in graph
+
+path from A to H:
+A to B with weight 1.000
+B to C with weight 1.000
+C to D with weight 1.000
+D to E with weight 1.000
+E to F with weight 1.000
+F to G with weight 1.000
+G to H with weight 1.000
+total cost: 7.000

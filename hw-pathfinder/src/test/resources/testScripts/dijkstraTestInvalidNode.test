@@ -1,0 +1,13 @@
+# Find a path with Dijkstra's algorithm when there is an invalid node
+
+CreateGraph graph
+
+AddNode graph A
+AddNode graph B
+AddNode graph C
+
+AddEdge graph A C 1.0
+AddEdge graph A D 1.0
+AddEdge graph A B 1.0
+
+FindPath graph A D

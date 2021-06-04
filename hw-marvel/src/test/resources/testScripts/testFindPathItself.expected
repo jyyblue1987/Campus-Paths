@@ -1,0 +1,5 @@
+# Test if the output is correct for finding a path to itself
+
+loaded graph superhero
+
+path from Ernst-the-Bicycling-Wizard to Ernst-the-Bicycling-Wizard:

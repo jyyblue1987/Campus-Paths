@@ -1,0 +1,9 @@
+# Test load graph classes correctly
+
+LoadGraph classes classes.csv
+
+ListNodes classes
+ListChildren classes CSE311
+ListChildren classes CSE312
+ListChildren classes CSE344
+ListChildren classes CSE332

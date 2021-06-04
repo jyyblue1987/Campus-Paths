@@ -1,0 +1,19 @@
+# check if the output is correct for finding the shortest path when multiple maths are possible
+
+CreateGraph g
+
+AddNode g n1
+AddNode g n2
+AddNode g n3
+AddNode g n4
+
+AddEdge g n1 n2 a
+AddEdge g n2 n1 b
+AddEdge g n4 n1 c
+AddEdge g n3 n2 d
+AddEdge g n2 n3 e
+AddEdge g n3 n2 f
+AddEdge g n1 n4 h
+AddEdge g n4 n2 i
+
+FindPath g n1 n3

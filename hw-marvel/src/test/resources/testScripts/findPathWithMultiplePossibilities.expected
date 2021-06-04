@@ -1,0 +1,21 @@
+# check if the output is correct for finding the shortest path when multiple maths are possible
+
+created graph g
+
+added node n1 to g
+added node n2 to g
+added node n3 to g
+added node n4 to g
+
+added edge a from n1 to n2 in g
+added edge b from n2 to n1 in g
+added edge c from n4 to n1 in g
+added edge d from n3 to n2 in g
+added edge e from n2 to n3 in g
+added edge f from n3 to n2 in g
+added edge h from n1 to n4 in g
+added edge i from n4 to n2 in g
+
+path from n1 to n3:
+n1 to n2 via a
+n2 to n3 via e

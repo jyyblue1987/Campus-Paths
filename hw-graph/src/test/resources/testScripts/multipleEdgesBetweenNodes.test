@@ -1,0 +1,21 @@
+# To test if the graph can support multiple edges between two nodes
+
+# Create a graph
+CreateGraph A
+
+# Add two nodes
+AddNode A n1
+AddNode A n2
+
+# Add 6 edges
+AddEdge A n1 n1 e11
+AddEdge A n1 n2 e12
+AddEdge A n2 n2 e22
+AddEdge A n2 n1 e21
+AddEdge A n2 n1 e21a
+AddEdge A n1 n1 e11a
+
+# Print out the nodes in the graph along with their outgoing edges
+ListNodes A
+ListChildren A n1
+ListChildren A n2

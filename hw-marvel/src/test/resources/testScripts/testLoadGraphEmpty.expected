@@ -1,0 +1,6 @@
+# Test load a graph with no nodes
+
+loaded graph empty
+
+unknown: n1
+unknown: n2

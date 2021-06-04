@@ -1,0 +1,14 @@
+# checks if the output is correct for paths with single labels
+
+CreateGraph g
+
+AddNode g n1
+AddNode g n2
+AddNode g n3
+AddNode g n4
+
+AddEdge g n1 n2 e12
+AddEdge g n2 n3 e23
+AddEdge g n3 n4 e34
+
+FindPath g n1 n4

@@ -1,0 +1,20 @@
+# checks if the output is correct for paths with multiple labels
+
+created graph g
+
+added node n1 to g
+added node n2 to g
+added node n3 to g
+added node n4 to g
+
+added edge a from n1 to n2 in g
+added edge b from n1 to n2 in g
+added edge c from n2 to n3 in g
+added edge d from n2 to n3 in g
+added edge e from n3 to n4 in g
+added edge f from n3 to n4 in g
+
+path from n1 to n4:
+n1 to n2 via a
+n2 to n3 via c
+n3 to n4 via e

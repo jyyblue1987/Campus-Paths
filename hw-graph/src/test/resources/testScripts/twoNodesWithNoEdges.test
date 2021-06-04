@@ -1,0 +1,15 @@
+# To test if we can have a graph with 2 nodes and no edges
+
+# Create a graph
+CreateGraph A
+
+# Add two nodes
+AddNode A n1
+AddNode A n2
+
+# Add 0 edges
+
+# Print out the nodes in the graph along with their outgoing edges (if any)
+ListNodes A
+ListChildren A n1
+ListChildren A n2
