@@ -12,11 +12,10 @@
 import React, {Component} from 'react';
 import "./App.css";
 import MapView from './MapView';
+import Control from "./Control";
 
 interface AppState {
     buildings: string[] | [];
-    start: string | "";
-    end: string | "";
     path: any | [],
 }
 
@@ -24,33 +23,32 @@ interface AppState {
 class App extends Component<{}, AppState> {
     start: string = "";
     end: string = "";
+    BASE_URL: string = "http://localhost:4567";
 
     constructor(props: {}) {
         super(props);
         this.state = {
             buildings: [],
-            start: "",
-            end: "",
             path: [],
         };
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         // Might want to do something here?
         console.log("App componentDidMount");
 
         this.getBuildNames();
     }
 
-    async getBuildNames() {
-        fetch('http://localhost:4567/getBuildingNames')
+    getBuildNames() {
+        fetch(`${this.BASE_URL}/getBuildingNames`)
             .then(response => response.json())
             .then(response => {
                 this.setState({
                     buildings: response,
-                    start: response[0],
-                    end: response[0],
                 })
+                this.start = response[0];
+                this.end = response[0];
 
                 console.log("Buildings", response);
             })
@@ -59,27 +57,21 @@ class App extends Component<{}, AppState> {
             });
     }
 
-    async onChangeStart(event: React.FormEvent) {
+    onSelectStart(building: string) {
         // Use cast to any works but is not type safe
-        let unsafeSearchTypeValue = ((event.target) as any).value;
+        this.start = building;
 
-        console.log("onChangeStart", unsafeSearchTypeValue);
-        await this.setState({start: unsafeSearchTypeValue});
-
-        await this.findPath();
+        this.findPath();
     }
 
-    async onChangeEnd(event: React.FormEvent) {
-        let unsafeSearchTypeValue = ((event.target) as any).value;
+    onSelectEnd(building: string) {
+        this.end = building;
 
-        console.log("onChangeEnd", unsafeSearchTypeValue);
-        await this.setState({end: unsafeSearchTypeValue});
-
-        await this.findPath();
+        this.findPath();
     }
 
-    async findPath() {
-        fetch(`http://localhost:4567/findPath?start=${this.state.start}&end=${this.state.end}`)
+    findPath() {
+        fetch(`${this.BASE_URL}/findPath?start=${this.start}&end=${this.end}`)
             .then(response => response.json())
             .then(response => {
                 this.setState({path: response.path})
@@ -89,32 +81,19 @@ class App extends Component<{}, AppState> {
             });
     }
 
-    async onReset(event: React.FormEvent ) {
-        await this.setState({start: this.state.buildings[0] + ""});
-        await this.setState({end: this.state.buildings[0] + ""});
-        await this.findPath();
+    onReset() {
+        this.start = this.state.buildings[0];
+        this.end = this.state.buildings[0];
+        this.findPath();
     }
 
     render() {
         return (
             <div>
-                <div className="control">
-                    <label>Start</label>
-                    <select value={this.state.start} onChange={(e) => this.onChangeStart(e)}>
-                        {this.state.buildings?.map((item: string) => {
-                            return (<option key={item} value={item}>{item}</option>);
-                        })}
-                    </select>
-
-                    <label>End</label>
-                    <select value={this.state.end} onChange={(e) => this.onChangeEnd(e)}>
-                        {this.state.buildings?.map((item: string) => {
-                            return (<option key={item} value={item}>{item}</option>);
-                        })}
-                    </select>
-
-                    <button onClick={(e) => this.onReset(e)}>Reset</button>
-                </div>
+                <Control buildings={this.state.buildings}
+                         onSelectStart={(building) => this.onSelectStart(building)}
+                         onSelectEnd={(building) => this.onSelectEnd(building)}
+                         onReset={() => this.onReset()}/>
                 <MapView path={this.state.path} />
             </div>
         );

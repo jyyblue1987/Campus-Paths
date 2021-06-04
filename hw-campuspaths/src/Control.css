@@ -23,3 +23,9 @@ but not setting the height means the image keeps the correct aspect ratio (it'll
 automatically to the correct thing).
  */
 
+.container {
+    width: 90%;
+    margin: 10px auto;
+}
+
+

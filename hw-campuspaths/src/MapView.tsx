@@ -41,15 +41,13 @@ class MapView extends Component<MapViewProps, MapViewState> {
 
     componentDidMount() {
         // Might want to do something here?
-        console.log("componentDidMount");
         this.fetchAndSaveImage();
     }
 
     componentDidUpdate() {
         // Might want something here too...
-        console.log("componentDidUpdate");
         this.drawBackgroundImage();
-        this.drawPath();
+        this.drawFindPath();
     }
 
     fetchAndSaveImage() {
@@ -69,40 +67,38 @@ class MapView extends Component<MapViewProps, MapViewState> {
     drawBackgroundImage() {
         let canvas = this.canvas.current;
         if (canvas === null) throw Error("Unable to draw, no canvas ref.");
-        let ctx = canvas.getContext("2d");
-        if (ctx === null) throw Error("Unable to draw, no valid graphics context.");
+        let context = canvas.getContext("2d");
+        if (context === null) throw Error("Unable to draw, no valid graphics context.");
         //
         if (this.state.backgroundImage !== null) { // This means the image has been loaded.
             // Sets the internal "drawing space" of the canvas to have the correct size.
             // This helps the canvas not be blurry.
             canvas.width = this.state.backgroundImage.width;
             canvas.height = this.state.backgroundImage.height;
-            ctx.drawImage(this.state.backgroundImage, 0, 0);
+            context.drawImage(this.state.backgroundImage, 0, 0);
         }
     }
 
-    drawPath() {
-        console.log("Paths", this.props.path);
+    drawFindPath() {
         let canvas = this.canvas.current;
         if (canvas === null) throw Error("Unable to draw, no canvas ref.");
-        let ctx = canvas.getContext("2d");
-        if (ctx === null) throw Error("Unable to draw, no valid graphics context.");
+        let context = canvas.getContext("2d");
+        if (context === null) throw Error("Unable to draw, no valid graphics context.");
 
-        ctx.beginPath();     // Start a new path.
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = "red";  // This path is red.
-        let path = this.props.path;
+        context.beginPath();     // Start a new path.
+        context.lineWidth = 10;
+        context.strokeStyle = "blue";  // This path is red.
 
-        if( path.length > 0 ) {
-            let first = path[0];
-            ctx.moveTo(first.start.x, first.start.y);
-            path.forEach(item => {
-                ctx?.lineTo(item.start.x, item.start.y);
-            });
+        if( this.props.path.length > 0 ) {
+            context.moveTo(this.props.path[0].start.x, this.props.path[0].start.y);
+            for(let i = 0; i < this.props.path.length; i++) {
+                let pos = this.props.path[i];
+                context?.lineTo(pos.start.x, pos.start.y);
+            };
 
-            ctx.stroke();
+            context.stroke();
         }
-        ctx.closePath(); // Close the current path.
+        context.closePath(); // Close the current path.
     }
 
     render() {
