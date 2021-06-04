@@ -89,6 +89,12 @@ class App extends Component<{}, AppState> {
             });
     }
 
+    async onReset(event: React.FormEvent ) {
+        await this.setState({start: this.state.buildings[0] + ""});
+        await this.setState({end: this.state.buildings[0] + ""});
+        await this.findPath();
+    }
+
     render() {
         return (
             <div>
@@ -106,6 +112,8 @@ class App extends Component<{}, AppState> {
                             return (<option key={item} value={item}>{item}</option>);
                         })}
                     </select>
+
+                    <button onClick={(e) => this.onReset(e)}>Reset</button>
                 </div>
                 <MapView path={this.state.path} />
             </div>
