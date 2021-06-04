@@ -39,24 +39,21 @@ class App extends Component<{}, AppState> {
         // Might want to do something here?
         console.log("App componentDidMount");
 
-        this.getBuildNames();
+        await this.getBuildNames();
     }
 
     async getBuildNames() {
-        fetch('http://localhost:4567/getBuildingNames')
-            .then(response => response.json())
-            .then(response => {
-                this.setState({
-                    buildings: response,
-                    start: response[0],
-                    end: response[0],
-                })
-
-                console.log("Buildings", response);
-            })
-            .catch(error => {
-
+        try {
+            let res = await fetch('http://localhost:4567/getBuildingNames');
+            let result = await res.json();
+            this.setState({
+                buildings: result,
+                start: result[0],
+                end: result[0],
             });
+        } catch(err) {
+            console.error(err);
+        }
     }
 
     async onChangeStart(event: React.FormEvent) {
@@ -79,14 +76,13 @@ class App extends Component<{}, AppState> {
     }
 
     async findPath() {
-        fetch(`http://localhost:4567/findPath?start=${this.state.start}&end=${this.state.end}`)
-            .then(response => response.json())
-            .then(response => {
-                this.setState({path: response.path})
-            })
-            .catch(error => {
-
-            });
+        try {
+            let res = await fetch(`http://localhost:4567/findPath?start=${this.state.start}&end=${this.state.end}`);
+            let result = await res.json();
+            this.setState({path: result.path})
+        } catch(err) {
+            console.error(err);
+        }
     }
 
     async onReset(event: React.FormEvent ) {
