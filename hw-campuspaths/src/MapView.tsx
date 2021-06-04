@@ -16,7 +16,11 @@ interface MapViewState {
     backgroundImage: HTMLImageElement | null;
 }
 
-class MapView extends Component<{}, MapViewState> {
+interface MapViewProps {
+    path: any[]| [];
+}
+
+class MapView extends Component<MapViewProps, MapViewState> {
 
     // NOTE:
     // This component is a suggestion for you to use, if you would like to.
@@ -27,7 +31,7 @@ class MapView extends Component<{}, MapViewState> {
 
     canvas: React.RefObject<HTMLCanvasElement>;
 
-    constructor(props: {}) {
+    constructor(props: MapViewProps) {
         super(props);
         this.state = {
             backgroundImage: null
@@ -45,6 +49,7 @@ class MapView extends Component<{}, MapViewState> {
         // Might want something here too...
         console.log("componentDidUpdate");
         this.drawBackgroundImage();
+        this.drawPath();
     }
 
     fetchAndSaveImage() {
@@ -74,6 +79,30 @@ class MapView extends Component<{}, MapViewState> {
             canvas.height = this.state.backgroundImage.height;
             ctx.drawImage(this.state.backgroundImage, 0, 0);
         }
+    }
+
+    drawPath() {
+        console.log("Paths", this.props.path);
+        let canvas = this.canvas.current;
+        if (canvas === null) throw Error("Unable to draw, no canvas ref.");
+        let ctx = canvas.getContext("2d");
+        if (ctx === null) throw Error("Unable to draw, no valid graphics context.");
+
+        ctx.beginPath();     // Start a new path.
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = "red";  // This path is red.
+        let path = this.props.path;
+
+        if( path.length > 0 ) {
+            let first = path[0];
+            ctx.moveTo(first.start.x, first.start.y);
+            path.forEach(item => {
+                ctx?.lineTo(item.start.x, item.start.y);
+            });
+
+            ctx.stroke();
+        }
+        ctx.closePath(); // Close the current path.
     }
 
     render() {

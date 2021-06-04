@@ -17,6 +17,7 @@ interface AppState {
     buildings: string[] | [];
     start: string | "";
     end: string | "";
+    path: any | [],
 }
 
 
@@ -30,6 +31,7 @@ class App extends Component<{}, AppState> {
             buildings: [],
             start: "",
             end: "",
+            path: [],
         };
     }
 
@@ -45,7 +47,9 @@ class App extends Component<{}, AppState> {
             .then(response => response.json())
             .then(response => {
                 this.setState({
-                    buildings: response
+                    buildings: response,
+                    start: response[0],
+                    end: response[0],
                 })
 
                 console.log("Buildings", response);
@@ -60,14 +64,29 @@ class App extends Component<{}, AppState> {
         let unsafeSearchTypeValue = ((event.target) as any).value;
 
         console.log("onChangeStart", unsafeSearchTypeValue);
-        this.setState({start: unsafeSearchTypeValue});
+        await this.setState({start: unsafeSearchTypeValue});
+
+        await this.findPath();
     }
 
     async onChangeEnd(event: React.FormEvent) {
         let unsafeSearchTypeValue = ((event.target) as any).value;
 
         console.log("onChangeEnd", unsafeSearchTypeValue);
-        this.setState({end: unsafeSearchTypeValue});
+        await this.setState({end: unsafeSearchTypeValue});
+
+        await this.findPath();
+    }
+
+    async findPath() {
+        fetch(`http://localhost:4567/findPath?start=${this.state.start}&end=${this.state.end}`)
+            .then(response => response.json())
+            .then(response => {
+                this.setState({path: response.path})
+            })
+            .catch(error => {
+
+            });
     }
 
     render() {
@@ -88,7 +107,7 @@ class App extends Component<{}, AppState> {
                         })}
                     </select>
                 </div>
-                <MapView />
+                <MapView path={this.state.path} />
             </div>
         );
     }
